@@ -12,12 +12,12 @@ while(True):
     faces = detector.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         sampleNum += 1
-        cv2.imwrite("./dataset/User."+id+"."+str(sampleNum)+".jpg", gray[y:y+h, x:x+w])
+        cv2.imwrite("./dataset/User."+id+"."+str(sampleNum)+".jpg", img[y:y+h, x:x+w])
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-        cv2.waitKey(100)
+        cv2.waitKey(300)
     cv2.imshow('frame',img)
     cv2.waitKey(1)
-    if(sampleNum > 20):
+    if(sampleNum >= 20):
         break
 
 cap.release()
