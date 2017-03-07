@@ -4,8 +4,9 @@
   -Detecting the faces, croping them and saving it into a folder
 2. Create Trainer and trained set
   -Using createLBPHFaceRecognizer() to train the faces detected
-  -
-      dither – Dithering method, used when converting from mode “RGB” to “P” or
-      from “RGB” or “L” to “1”. Available methods are NONE or FLOYDSTEINBERG (default).
+  -Using Image.open(imagePath).convert('L') to convert colored and GrayScale
+  images into bilevel images using Floyd-Steinberg dither
+    --dither – Dithering method, used when converting from mode “RGB” to “P” or
+    from “RGB” or “L” to “1”. Available methods are NONE or FLOYDSTEINBERG (default)
 
 3. Create Program to recognize
