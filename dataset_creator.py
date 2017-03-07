@@ -19,7 +19,7 @@ def insertOrUpdate(Id, Name) :
         cmd = "INSERT INTO People(ID,Name) Values(" + Id + "," + Name + ")"
 
 id = raw_input('Enter user id : ')
-id = raw_input('Enter user name : ')
+# id = raw_input('Enter user name : ')
 sampleNum = 0
 while(True):
     ret, img = cap.read()

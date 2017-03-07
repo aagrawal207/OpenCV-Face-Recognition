@@ -13,7 +13,7 @@ def getImagesWithID(path):
     for imagePath in imagePaths:
         faceImg = Image.open(imagePath).convert('L')
         faceNp = np.array(faceImg, 'uint8')
-        ID = os.path.split(imagePath)[-1].split('.')[1]
+        ID = int(os.path.split(imagePath)[-1].split('.')[1])
         faces.append(faceNp)
         Ids.append(ID)
         cv2.imshow("Training", faceNp)
