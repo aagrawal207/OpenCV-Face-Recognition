@@ -9,11 +9,11 @@ cap = cv2.VideoCapture(0)                                                       
 rec = cv2.createLBPHFaceRecognizer()                                            # Local Binary Patterns Histograms
 rec.load('./recognizer/trainingData.yml')                                       # loading the trained data
 id = 0
-font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 3, 1, 0, 2)        # the font of text on face recognition
+font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 3, 1, 0, 2)                # the font of text on face recognition
 while(True):
-    ret, img = cap.read()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = detector.detectMultiScale(gray, 1.3, 5)
+    ret, img = cap.read()                                                       # reading the camera input
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
+    faces = detector.detectMultiScale(gray, 1.3, 5)                             #  detecting the faces
     if(len(faces)!=0):
         for (x,y,w,h) in faces:
             cv2.rectangle(img, (x, y), (x+w,y+h), (255, 255, 255), 2)           # Drawing the rectangle on the face
@@ -39,5 +39,5 @@ while(True):
     if k == 27:
         break
 
-cap.release()
-cv2.destroyAllWindows()
+cap.release()                                                                   # turning the webcam off
+cv2.destroyAllWindows()                                                         # Closing all the opened windows
