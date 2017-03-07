@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 
 detector= cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
+#cap = cv2.VideoCapture('video_for_training.mp4')
 cap = cv2.VideoCapture(0)
 
 id = raw_input('Enter user id : ')

@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-detector= cv2.CascadeClassifier('haarcascade_frontalface_alt_tree.xml')
+detector= cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
+#cap = cv2.VideoCapture('test_video.mp4')
 cap = cv2.VideoCapture(0)
 rec = cv2.createLBPHFaceRecognizer()
 rec.load('./recognizer/trainingData.yml')
@@ -23,6 +24,10 @@ while(True):
                 id = 'Ayush'
             elif id == 4:
                 id = 'Raghav'
+            elif id == 5:
+                id = 'Dhanush'
+            elif id == 6:
+                id = 'Sahil'
             else:
                 id = 'Unknown'
             cv2.cv.PutText(cv2.cv.fromarray(img), str(id), (x, y+h), font, 255)
