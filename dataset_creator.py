@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-detector= cv2.CascadeClassifier('haarcascade_frontalface_alt_tree.xml')
+detector= cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
 cap = cv2.VideoCapture(0)
 
 id = raw_input('Enter user id : ')
