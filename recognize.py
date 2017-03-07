@@ -28,6 +28,8 @@ while(True):
                 id = 'Dhanush'
             elif id == 6:
                 id = 'Sahil'
+            elif id == 7:
+                id = 'Malhar'
             cv2.cv.PutText(cv2.cv.fromarray(img), str(id), (x, y+h), font, 255)
 
     cv2.imshow('frame',img)
