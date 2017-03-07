@@ -1,9 +1,9 @@
 import os                                                                       # import for taking the imagePaths
-import cv2
-import numpy as np
-from PIL import Image
+import cv2                                                                      # openCV
+import numpy as np                                                              # for numpy arrays
+from PIL import Image                                                           # for Image.open(imagePath).convert('L')
 
-recognizer = cv2.createLBPHFaceRecognizer()                                     #Local Binary Patterns Histograms
+recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
 # This is the common interface to train all of the available cv::FaceRecognizer implementations
 path = './dataset'                                                              # Folder where faces are saved
 
@@ -16,8 +16,8 @@ def getImagesWithID(path):
         faceImg = Image.open(imagePath).convert('L')
         faceNp = np.array(faceImg, 'uint8')                                     # Converting face array into numpy array
         ID = int(os.path.split(imagePath)[-1].split('.')[1])                    # Check this again
-        faces.append(faceNp)
-        Ids.append(ID)
+        faces.append(faceNp)                                                    # adding the dilevel face into faces array
+        Ids.append(ID)                                                          # index of ID and faceNp is same in both arrays
         cv2.imshow("Training", faceNp)                                          # Showing the faces which are getting trained
         cv2.waitKey(10)                                                         # Waiting time id 10 milisecond
     return Ids, faces
