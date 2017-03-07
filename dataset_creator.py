@@ -6,6 +6,7 @@ detector= cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.
 cap = cv2.VideoCapture(0)
 
 id = raw_input('Enter user id : ')
+id = raw_input('Enter user name : ')
 sampleNum = 0
 while(True):
     ret, img = cap.read()
