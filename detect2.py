@@ -10,7 +10,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 faces = face_cascade.detectMultiScale(
                         gray,
                         scaleFactor=1.2,
-                        minNeighbors=1,
+                        minNeighbors=4,
                         minSize=(25, 25)
                         )
 for (x, y, w, h) in faces:
@@ -23,14 +23,14 @@ for (x, y, w, h) in faces:
         cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 0, 255), 2)
 
 title = str(len(faces)) + ' faces found.'
-cv2.imshow(title, img)
+# cv2.imshow(title, img)
 # matplotlib do not show the bgr color, instead it shows rbg color
-# b,g,r = cv2.split(img)
-# img2 = cv2.merge([r, g, b])
-# plt.imshow(img2, cmap = 'gray', interpolation = 'bicubic')
-# plt.xticks([]), plt.yticks([]) # to hide tick values on X and Y
-# plt.show()
-# whne everything is done
+b,g,r = cv2.split(img)
+img2 = cv2.merge([r, g, b])
+plt.imshow(img2, cmap = 'gray', interpolation = 'bicubic')
+plt.xticks([]), plt.yticks([]) # to hide tick values on X and Y
+plt.show()
+# when everything is done
 k = cv2.waitKey(0)
 if k == 27:         # wait for ESC key to exit
     cv2.destroyAllWindows()
