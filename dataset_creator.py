@@ -1,9 +1,22 @@
 import cv2
 import numpy as np
+import sqlite3
 
 detector= cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
 #cap = cv2.VideoCapture('video_for_training.mp4')
 cap = cv2.VideoCapture(0)
+
+def insertOrUpdate(Id, Name) :
+    connect = sqlite3.connect("Face-DataBase")
+    cmd = "SELECT * FROM Students WHERE ID=" + Id
+    cursor = connect.execute(cmd)
+    isRecordExist = 0
+    for row in cursor:
+        isRecordExist = 1
+    if isRecordExist == 1:
+        cmd = "UPDATE Students SET Name = " + Name + " WHERE ID = " + Id
+    else:
+        cmd = "INSERT INTO People(ID,Name) Values(" + Id + "," + Name + ")"
 
 id = raw_input('Enter user id : ')
 id = raw_input('Enter user name : ')
