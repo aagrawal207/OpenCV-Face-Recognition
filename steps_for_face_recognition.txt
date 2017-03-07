@@ -10,3 +10,4 @@
     from “RGB” or “L” to “1”. Available methods are NONE or FLOYDSTEINBERG (default)
 
 3. Create Program to recognize
+hi
