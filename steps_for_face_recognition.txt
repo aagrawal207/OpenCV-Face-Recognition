@@ -1,3 +1,11 @@
 1. Create Program which create Dataset
-2. Create Trainer
+  -Using Viola-Jones Algorithm with either HaarCascade or LBP CascadeClassifier
+  -Taking the input and converting it into GrayScale
+  -Detecting the faces, croping them and saving it into a folder
+2. Create Trainer and trained set
+  -Using createLBPHFaceRecognizer() to train the faces detected
+  -
+      dither – Dithering method, used when converting from mode “RGB” to “P” or
+      from “RGB” or “L” to “1”. Available methods are NONE or FLOYDSTEINBERG (default).
+
 3. Create Program to recognize
