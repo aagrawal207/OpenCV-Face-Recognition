@@ -1,3 +1,4 @@
 1. Create Program which create Dataset
+  Using Viola-Jones Algorithm
 2. Create Trainer
 3. Create Program to recognize
