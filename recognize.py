@@ -41,7 +41,7 @@ while(True):
                                 "Unknown" + str(conf),
                                 (x, y+h),
                                 font,
-                                255)                                        # Writing the name of the face recognized
+                                255)                                            # Writing the name of the face recognized
 
 
     cv2.imshow('frame',img)                                                     # Showing each frame on the window

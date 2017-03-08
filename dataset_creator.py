@@ -9,16 +9,16 @@ cap = cv2.VideoCapture(0)
 
 def insertOrUpdate(Id, Name, roll) :                                            # this function is for database
     connect = sqlite3.connect("Face-DataBase")                                  # connecting to the database
-    cmd = "SELECT * FROM Students WHERE ID=" + Id                               # selecting the row of an id into consideration
+    cmd = "SELECT * FROM Students WHERE ID = " + Id                             # selecting the row of an id into consideration
     cursor = connect.execute(cmd)
     isRecordExist = 0
     for row in cursor:                                                          # checking wheather the id exist or not
         isRecordExist = 1
-    if isRecordExist == 1:                                                     # updating name and roll no
+    if isRecordExist == 1:                                                      # updating name and roll no
         connect.execute("UPDATE Students SET Name = ? WHERE ID = ?",(Name, Id))
         connect.execute("UPDATE Students SET Roll = ? WHERE ID = ?",(roll, Id))
-    else:                   
-    	params = (Id, Name, roll)                                                    # insering a new student data
+    else:
+    	params = (Id, Name, roll)                                               # insering a new student data
     	connect.execute("INSERT INTO Students VALUES(?, ?, ?)", params)
     connect.commit()                                                            # commiting into the database
     connect.close()                                                             # closing the connection
