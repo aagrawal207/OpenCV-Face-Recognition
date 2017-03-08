@@ -7,7 +7,7 @@ detector = cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree
 # cap = cv2.VideoCapture('video_for_training.mp4')
 cap = cv2.VideoCapture(0)
 
-def insertOrUpdate(Id, Name) :                                                  # this function is for database
+def insertOrUpdate(Id, Name, roll) :                                            # this function is for database
     connect = sqlite3.connect("Face-DataBase")
     cmd = "SELECT * FROM Students WHERE ID=" + Id
     cursor = connect.execute(cmd)
@@ -16,15 +16,20 @@ def insertOrUpdate(Id, Name) :                                                  
         isRecordExist = 1
     if isRecordExist == 1:
         cmd = "UPDATE Students SET Name = " + Name + " WHERE ID = " + Id
+        connect.execute(cmd)
+        cmd = "UPDATE Students SET Roll = " + roll + "WHERE ID = " + Id
     else:
-        cmd = "INSERT INTO Students(ID,Name) Values(" + Id + "," + Name + ")"
+        cmd = '''INSERT INTO
+                    Students(ID,Name,Roll) 
+                    Values(''' + Id + "," + Name + "," + roll + ")"
     connect.execute(cmd)
     connect.commit()
     connect.close()
 
 id = raw_input('Enter user id : ')
-name = raw_input('Enter user name : ')
-insertOrUpdate(id, name)
+name = raw_input("Enter student's name : ")
+roll = raw_input("Enter student's roll no. : ")
+insertOrUpdate(id, name, roll)
 sampleNum = 0
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
