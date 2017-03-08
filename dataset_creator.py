@@ -14,22 +14,19 @@ def insertOrUpdate(Id, Name, roll) :                                            
     isRecordExist = 0
     for row in cursor:                                                          # checking wheather the id exist or not
         isRecordExist = 1
-    if isRecordExist == 1:                                                      # updating name and roll no
-        cmd = "UPDATE Students SET Name = " + Name + " WHERE ID = " + Id
-        connect.execute(cmd)
-        cmd = "UPDATE Students SET Roll = " + roll + "WHERE ID = " + Id
-    else:                                                                       # insering a new student data
-        cmd = '''INSERT INTO
-                    Students(ID,Name,Roll)
-                    Values(''' + Id + "," + Name + "," + roll + ")"
-    connect.execute(cmd)
+    if isRecordExist == 1:                                                     # updating name and roll no
+        connect.execute("UPDATE Students SET Name = ? WHERE ID = ?",(Name, Id))
+        connect.execute("UPDATE Students SET Roll = ? WHERE ID = ?",(roll, Id))
+    else:                   
+    	params = (Id, Name, roll)                                                    # insering a new student data
+    	connect.execute("INSERT INTO Students VALUES(?, ?, ?)", params)
     connect.commit()                                                            # commiting into the database
     connect.close()                                                             # closing the connection
 
-id = raw_input('Enter user id : ')
+Id = raw_input('Enter user id : ')
 name = raw_input("Enter student's name : ")
 roll = raw_input("Enter student's roll no. : ")
-insertOrUpdate(id, name, roll)                                                  # calling the sqlite3 database
+insertOrUpdate(Id, name, roll)                                                  # calling the sqlite3 database
 sampleNum = 0
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
@@ -42,7 +39,7 @@ while(True):
                             )                                                   # Detecting faces
     for (x,y,w,h) in faces:                                                     # loop will run for each face detected
         sampleNum += 1
-        cv2.imwrite("./dataset/User."+id+"."+str(sampleNum)+".jpg",
+        cv2.imwrite("./dataset/User."+Id+"."+str(sampleNum)+".jpg",
                     img[y:y+h, x:x+w])                                          # Saving the faces
         cv2.rectangle(img, (x, y),(x+w, y+h),(0,255,0) ,2)                      # Forming the rectangle
         cv2.waitKey(200)                                                        # waiting time of 200 milisecond
