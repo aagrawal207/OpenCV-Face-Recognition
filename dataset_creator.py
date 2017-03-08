@@ -17,10 +17,14 @@ def insertOrUpdate(Id, Name) :                                                  
     if isRecordExist == 1:
         cmd = "UPDATE Students SET Name = " + Name + " WHERE ID = " + Id
     else:
-        cmd = "INSERT INTO People(ID,Name) Values(" + Id + "," + Name + ")"
+        cmd = "INSERT INTO Students(ID,Name) Values(" + Id + "," + Name + ")"
+    connect.execute(cmd)
+    connect.commit()
+    connect.close()
 
 id = raw_input('Enter user id : ')
-# id = raw_input('Enter user name : ')
+name = raw_input('Enter user name : ')
+insertOrUpdate(id, name)
 sampleNum = 0
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
