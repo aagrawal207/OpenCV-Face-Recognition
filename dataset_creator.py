@@ -8,28 +8,28 @@ detector = cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree
 cap = cv2.VideoCapture(0)
 
 def insertOrUpdate(Id, Name, roll) :                                            # this function is for database
-    connect = sqlite3.connect("Face-DataBase")
-    cmd = "SELECT * FROM Students WHERE ID=" + Id
+    connect = sqlite3.connect("Face-DataBase")                                  # connecting to the database
+    cmd = "SELECT * FROM Students WHERE ID=" + Id                               # selecting the row of an id into consideration
     cursor = connect.execute(cmd)
     isRecordExist = 0
-    for row in cursor:
+    for row in cursor:                                                          # checking wheather the id exist or not
         isRecordExist = 1
-    if isRecordExist == 1:
+    if isRecordExist == 1:                                                      # updating name and roll no
         cmd = "UPDATE Students SET Name = " + Name + " WHERE ID = " + Id
         connect.execute(cmd)
         cmd = "UPDATE Students SET Roll = " + roll + "WHERE ID = " + Id
-    else:
+    else:                                                                       # insering a new student data
         cmd = '''INSERT INTO
-                    Students(ID,Name,Roll) 
+                    Students(ID,Name,Roll)
                     Values(''' + Id + "," + Name + "," + roll + ")"
     connect.execute(cmd)
-    connect.commit()
-    connect.close()
+    connect.commit()                                                            # commiting into the database
+    connect.close()                                                             # closing the connection
 
 id = raw_input('Enter user id : ')
 name = raw_input("Enter student's name : ")
 roll = raw_input("Enter student's roll no. : ")
-insertOrUpdate(id, name, roll)
+insertOrUpdate(id, name, roll)                                                  # calling the sqlite3 database
 sampleNum = 0
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
