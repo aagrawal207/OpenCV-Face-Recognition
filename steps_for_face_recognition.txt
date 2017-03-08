@@ -1,12 +1,35 @@
+Introduction :
+
+
+Steps to face recognition:
 1. Create Program which create Dataset
   -Using Viola-Jones Algorithm with either HaarCascade or LBP CascadeClassifier
+
   -Taking the input and converting it into GrayScale
+
   -Detecting the faces, croping them and saving it into a folder
+
 2. Create Trainer and trained set
   -Using createLBPHFaceRecognizer() to train the faces detected
+
   -Using Image.open(imagePath).convert('L') to convert colored and GrayScale
   images into bilevel images using Floyd-Steinberg dither
     --dither – Dithering method, used when converting from mode “RGB” to “P” or
     from “RGB” or “L” to “1”. Available methods are NONE or FLOYDSTEINBERG (default)
 
+  -call cv2.createLBPHFaceRecognizer().train(faces, np.array(Ids))
+
+  -save the yml file formed by above call
+
 3. Create Program to recognize
+  -
+
+
+
+--------------------------------------------------------------------------------
+References ->
+Viola-Jones method -
+    https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework
+OpenCV Documentaion - http://docs.opencv.org/2.4/modules/refman.html
+OpenFace - http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
+OpenFace website -

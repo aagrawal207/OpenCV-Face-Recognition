@@ -1,0 +1,128 @@
+%-- Thursday 09 February 2017 01:03:28 PM IST --%
+
+
+y1 = x1(:);
+y2 = x2(:);
+y3 = x3(:);
+y4 = x4(:);
+y5 = x5(:);
+y6 = x6(:);
+y7 = x7(:);
+y8 = x8(:);
+y9 = x9(:);
+y10 = x10(:); % 2D image to vector
+
+%y=[y1 y2 y3 y4 y5 y6 y7 y8 y9 y10]
+
+%-- Friday 10 February 2017 03:41:35 PM IST --%
+
+
+%X = [x1 x2 x3 x4 x5 x5 x6 x7 x8 x9 x10]
+%avg=(x1+x2+x3+x4+x5+x6+x7+x8+x9+10)/10
+
+full = [y1 y2 y3 y4 y5 y6 y7 y8 y9 y10] % stack all vector to one matrix
+
+avg=(y1+y2+y3+y4+y5+y6+y7+y8+y9+y10)/10 % find avg face
+
+y11=y1-avg
+y12=y2-avg
+y13=y3-avg
+y14=y4-avg
+y15=y5-avg
+y16=y6-avg
+y17=y7-avg
+y18=y8-avg
+y19=y9-avg
+y110=y10-avg % subtract avg face from flatted face vectors
+
+%fullavg=(y11+y12+y13+y14+y15+y16+y17+y18+y19+y110)/10
+
+fullafteravg = [y11 y12 y13 y14 y15 y16 y17 y18 y19 y110] % full normalised faces in one matrix
+
+%cov=fullafteravg*transpose(fullafteravg)
+%cov=fullafteravg * transpose(fullafteravg)
+%cov=fullafteravg .* transpose(fullafteravg)
+%cov=fullafteravg * transpose(fullafteravg)
+
+trans= transpose(fullafteravg)
+%cov=fullafteravg * ttans
+%cov=fullafteravg * trans
+%cov=fullafteravg * transpose(fullafteravg)
+%cov=mul(fullafteravg,trans)
+%cov=mult(fullafteravg,trans)
+%mult
+%cov=fullafteravg * trans
+
+cov=double(fullafteravg) * double(trans) % A * trans(A)
+cov=double(trans)* double(fullafteravg) % trans(A) * A
+
+[eigenvectors,eigenvalues] = eig(cov) % find face eigen vectors
+
+%e1 = eigenvector(:1)
+%e1 = eigenvectors(:1)
+
+e1 = eigenvectors(:,1) % lower dim eigen vector
+
+%h1 = fullafteravg * e1 
+h1 = double(fullafteravg) * double(e1) % convert lower dim eigen vector to orginial dim
+
+img1 = reshape(h1,[112,92]) % 1D to 2D matrix
+img1pos = abs(img1) 
+
+eigenface1 = mat2gray(img1pos) % matrix to img
+imshow(eigenface1) % first eigenface = eigenface1
+
+% reshape and display all eigen faces
+for k=1:10
+    eval(['e' num2str(k) '= eigenvectors(:,k);']);
+    %e1 = eigenvectors(:,1); % lower dim eigen vector
+
+    %h1 = fullafteravg * e1 
+    eval(['h' num2str(k) '= double(fullafteravg) * double(e' num2str(k) ');']);
+    %h1 = double(fullafteravg) * double(e1); % convert lower dim eigen vector to orginial dim
+    
+    eval(['H(:,k) =h' num2str(k) ]);
+    %H(:,k) = aa; % convert lower dim eigen vector to orginial dim in one matrix H
+    
+    eval(['img' num2str(k) '= reshape(h' num2str(k) ',[112,92]);']);
+    %img1 = reshape(h1,[112,92]); % 1D to 2D matrix
+    
+    eval(['img1pos' num2str(k) '= abs(img' num2str(k) ');']);
+    %img1pos = abs(img1); 
+    
+    eval(['eigenface' num2str(k) '= mat2gray(img1pos' num2str(k) ');']);
+    %eigenface1 = mat2gray(img1pos); % matrix to img
+    
+    %eval(['imshow(eigenface' num2str(k) ');']);
+    %imshow(eigenface1);
+    
+    eval(['subplot(2,5,' num2str(k) '),imshow(eigenface' num2str(k) ');']);
+    %subplot(2,5,k), imshow(eigenface);
+end
+
+Ht = transpose(H); % transpose of H (full orginal dim eigen vectors)
+
+% finding weight: image = weightmatrix * eigenfaces => weightmatrix = transpose(eigenfaces) * image
+for k=1:10
+    eval(['eachnormvector = y1' num2str(k)]) 
+    W1 = double(Ht) * double(eachnormvector); % finding weight vector, eachnormvector = normalised face vector
+end
+
+% euclidean distance between weight: W1 & W2 = weight matrices of same person
+s=0;
+for k=1:10
+    s = s + ((W1(k) - W2(k))^2);
+end
+
+% euclidean distance between weight: newW = weight matrix of an unknown face
+s=0;
+for k=1:10
+    s = s + ((W1(k) - newW(k))^2);
+end
+
+% test result
+% face s1/1 and s1/2 2.5383e+15 same person
+% face s1/1 and s2/1 5.0804e+15 different person
+
+
+
