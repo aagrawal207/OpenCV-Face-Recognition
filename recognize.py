@@ -28,7 +28,7 @@ while(True):
         for (x,y,w,h) in faces:
             cv2.rectangle(img, (x, y), (x+w,y+h), (255, 255, 255), 2)           # Drawing the rectangle on the face
             id, conf = rec.predict(gray[y:y+h, x:x+w])                          # Comparing from the trained data
-            if conf < 70:
+            if conf < 100:
                 profile = getProfile(id)
                 if profile != None:
                     cv2.cv.PutText(cv2.cv.fromarray(img),
