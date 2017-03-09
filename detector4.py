@@ -11,7 +11,7 @@ while(True):
     # The 1 in the second argument indicates that we should upsample the image
     # 1 time.  This will make everything bigger and allow us to detect more
     # faces.
-    dets = detector(img, 1)
+    dets = detector(img, 0)
 
     for i, d in enumerate(dets):
         cv2.rectangle(img, (d.left(), d.top()), (d.right(), d.bottom()), (255, 255, 255), 2)
