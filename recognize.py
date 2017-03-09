@@ -19,7 +19,7 @@ def getProfile(id):
 
 rec = cv2.createLBPHFaceRecognizer()                                            # Local Binary Patterns Histograms
 rec.load('./recognizer/trainingData.yml')                                       # loading the trained data
-font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 3, 1, 0, 2)                # the font of text on face recognition
+font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                # the font of text on face recognition
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
@@ -32,10 +32,10 @@ while(True):
                 profile = getProfile(id)
                 if profile != None:
                     cv2.cv.PutText(cv2.cv.fromarray(img),
-                                    profile[1] + str(conf),
+                                    profile[1] + str("(%.2f)" % conf),
                                     (x, y+h),
                                     font,
-                                    255)                                        # Writing the name of the face recognized
+                                    (0, 0, 0))                                # Writing the name of the face recognized
             else :
                 cv2.cv.PutText(cv2.cv.fromarray(img),
                                 "Unknown" + str(conf),
