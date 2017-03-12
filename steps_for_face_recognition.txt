@@ -29,3 +29,5 @@ Viola-Jones method -
 OpenCV Documentaion - http://docs.opencv.org/2.4/modules/refman.html
 OpenFace - http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
 OpenFace website - https://cmusatyalab.github.io/openface/
+FaceNet: A Unified Embedding for Face Recognition and Clustering -
+    http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
