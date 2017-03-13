@@ -36,6 +36,7 @@ while(True):
     for i, d in enumerate(dets):
         picName = str(i + 1) + '.jpg'
         picFolderName = folderName + '/' + picName
+        # Add alignment of faces before recognitioin
         id, conf = rec.predict(gray[d.top():d.bottom(), d.left():d.right()])    # Comparing from the trained data
         if conf < 150:
             profile = getProfile(id)

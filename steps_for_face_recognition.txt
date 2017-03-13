@@ -26,7 +26,7 @@
 References ->
 Viola-Jones method -
     https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework
-OpenCV Documentaion - http://docs.opencv.org/2.4/modules/refman.html
+OpenCV Documentaion(Important) - http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html
 OpenFace - http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
 OpenFace website - https://cmusatyalab.github.io/openface/
 FaceNet: A Unified Embedding for Face Recognition and Clustering -

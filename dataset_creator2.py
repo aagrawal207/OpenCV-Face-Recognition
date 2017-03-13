@@ -32,8 +32,9 @@ while(True):
     ret, img = cap.read()                                                       # reading the camera input
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # Converting to GrayScale
     dets = detector(img, 1)
-    for i, d in enumerate(dets):                                                           # loop will run for each face detected
+    for i, d in enumerate(dets):                                                # loop will run for each face detected
         sampleNum += 1
+        # instead of a single folder, make different folder for each person
         cv2.imwrite("./dataset/User."+Id+"."+str(sampleNum)+".jpg",
                     img[d.top():d.bottom(), d.left():d.right()])                # Saving the faces
         cv2.rectangle(img, (d.left(), d.top()),(d.right(), d.bottom()),(0,255,0) ,2) # Forming the rectangle
