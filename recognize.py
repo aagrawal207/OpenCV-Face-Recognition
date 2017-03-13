@@ -21,8 +21,7 @@ rec = cv2.createLBPHFaceRecognizer()                                            
 rec.load('./recognizer/trainingData.yml')                                       # loading the trained data
 font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                # the font of text on face recognition
 while(True):
-    ret, img = cap.read()                                                       # reading the camera input
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
+    ret, img = cap.read()                                                       # reading the camera inputit
     faces = detector.detectMultiScale(gray, 1.3, 5)                             #  detecting the faces
     if(len(faces)!=0):
         for (x,y,w,h) in faces:
@@ -35,7 +34,7 @@ while(True):
                                     profile[1] + str("(%.2f)" % conf),
                                     (x, y+h),
                                     font,
-                                    (0, 0, 0))                                # Writing the name of the face recognized
+                                    (0, 0, 0))                                  # Writing the name of the face recognized
             else :
                 cv2.cv.PutText(cv2.cv.fromarray(img),
                                 "Unknown" + str(conf),
