@@ -25,6 +25,8 @@ rec = cv2.createLBPHFaceRecognizer()                                            
 rec.load('./recognizer/trainingData.yml')                                       # loading the trained data
 font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                # the font of text on face recognition
 
+# make an array of all the students in the database initialied as zero
+
 picNum = 1
 while(True):
     ret, img = cam.read()
@@ -52,6 +54,7 @@ while(True):
                             (d.left(), d.bottom()),
                             font,
                             255)                                                # Writing the name of the face recognized
+        # keep a single picture with squares instead of multiple faces in different folder
         cv2.imwrite(picFolderName, img[d.top():d.bottom(), d.left():d.right()])
         cv2.rectangle(img, (d.left(), d.top()), (d.right(), d.bottom()), (255, 255, 255), 2)
     picNum += 1
