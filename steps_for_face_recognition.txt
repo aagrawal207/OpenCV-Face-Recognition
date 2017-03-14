@@ -1,12 +1,16 @@
 1. Create Program which create Dataset
-  -Using Viola-Jones Algorithm with either HaarCascade or LBP CascadeClassifier
+  -Using dlib library to detect the faces - dlib.get_frontal_face_detector()
 
   -Taking the input and converting it into GrayScale
 
-  -Detecting the faces, croping them and saving it into a folder
+  -Detecting the faces, croping them, aligning them and saving it into a folder
+
+  -Connecting it to the sqlite3 database for storing the information of students
 
 2. Create Trainer and trained set
-  -Using createLBPHFaceRecognizer() to train the faces detected
+  -Using createLBPHFaceRecognizer() to train the faces detected, there are two
+    other options as well -> createEigenFaceRecognizer() and createFisherFaceRecognizer()
+    (Should try these options as well)
 
   -Using Image.open(imagePath).convert('L') to convert colored and GrayScale
   images into bilevel images using Floyd-Steinberg dither
@@ -18,16 +22,25 @@
   -save the yml file formed by above call
 
 3. Create Program to recognize
-  -
+  -Creating a folder with the name of today's date and storing all the pictures taken today in this folder
 
+  -Taking a pictures and detecting as many faces as possible using dlib library
 
+  -Aligning all the faces detected one by one
+
+  -Appling createLBPHFaceRecognizer() on aligned faces to recognize the face
+
+  -Storing in an array how many total times, a particular student is recognized today
 
 --------------------------------------------------------------------------------
 References ->
-Viola-Jones method -
+Dlib face detection(Important) - http://dlib.net/face_detector.py.html
+                                 https://github.com/davisking/dlib
+                                 http://dlib.net/imaging.html
+Viola-Jones method(Not Important) -
     https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework
 OpenCV Documentaion(Important) - http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html
-OpenFace - http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
+OpenFace(Tried a lot to use) - http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
 OpenFace website - https://cmusatyalab.github.io/openface/
-FaceNet: A Unified Embedding for Face Recognition and Clustering -
+FaceNet: A Unified Embedding for Face Recognition and Clustering(Still has to read this paper, found it on openface website) -
     http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf

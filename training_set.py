@@ -4,16 +4,15 @@ import numpy as np                                                              
 from PIL import Image                                                           # for Image.open(imagePath).convert('L')
 
 recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
-# This is the common interface to train all of the available cv::FaceRecognizer implementations
 path = './dataset'                                                              # Folder where faces are saved
+# after different folders are created for each student then code needs to be changed
 
 def getImagesWithID(path):
     imagePaths = [os.path.join(path, f) for f in os.listdir(path)]              # Joining './dataset' and '<image names>'
     faces = []                                                                  # Empty array for faces
     Ids = []                                                                    # Empty array for Person Ids
     for imagePath in imagePaths:
-        # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
-        faceImg = Image.open(imagePath).convert('L')
+        faceImg = Image.open(imagePath).convert('L') # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
         faceNp = np.array(faceImg, 'uint8')                                     # Converting face array into numpy array
         ID = int(os.path.split(imagePath)[-1].split('.')[1])                    # Check this again
         faces.append(faceNp)                                                    # adding the dilevel face into faces array
