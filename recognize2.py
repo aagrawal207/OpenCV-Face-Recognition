@@ -61,11 +61,11 @@ while(True):
         cv2.rectangle(img, (d.left(), d.top()), (d.right(), d.bottom()), (255, 255, 255), 2)
     cv2.imshow('frame', img)                                                     # Showing each frame on the window
     cv2.imwrite(path + '/pic' + str(picNum) + '.jpg', img)
-    # detectPrint = 'Frame' + str(picNum) + ". %d face detected" % len(dets)
-    # if faceRec != 0:
-    #     print detectPrint + " and ", faceRec, " face recognized with confidence %.2f"%(totalConf / faceRec)
-    # else:
-    #     print detectPrint + " and 0 faces recognized"
+    detectPrint = 'Frame' + str(picNum) + ". %d face detected" % len(dets)
+    if faceRec != 0:
+        print detectPrint + " and ", faceRec, " face recognized with confidence %.2f"%(totalConf / faceRec)
+    else:
+        print detectPrint + " and 0 faces recognized"
     picNum += 1
     k = cv2.waitKey(10) & 0xff                                                  # Turn off the recognizer using Esc Key
     if k == 27:
