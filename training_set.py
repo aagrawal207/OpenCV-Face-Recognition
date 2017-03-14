@@ -5,20 +5,23 @@ from PIL import Image                                                           
 
 recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
 path = './dataset'                                                              # Folder where faces are saved
-# after different folders are created for each student then code needs to be changed
 
-def getImagesWithID(path):
-    imagePaths = [os.path.join(path, f) for f in os.listdir(path)]              # Joining './dataset' and '<image names>'
+def getImagesWithID(path):      
+    imageFolders = [os.path.join(path, f) for f in os.listdir(path)]    # Joining './dataset' and '<image names>'
     faces = []                                                                  # Empty array for faces
-    Ids = []                                                                    # Empty array for Person Ids
-    for imagePath in imagePaths:
-        faceImg = Image.open(imagePath).convert('L') # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
-        faceNp = np.array(faceImg, 'uint8')                                     # Converting face array into numpy array
-        ID = int(os.path.split(imagePath)[-1].split('.')[1])                    # Check this again
-        faces.append(faceNp)                                                    # adding the dilevel face into faces array
-        Ids.append(ID)                                                          # index of ID and faceNp is same in both arrays
-        cv2.imshow("Training", faceNp)                                          # Showing the faces which are getting trained
-        cv2.waitKey(10)                                                         # Waiting time id 10 milisecond
+    Ids = []
+    for imageFolder in imageFolders:
+        imagePaths = [os.path.join(imageFolder, f) for f in os.listdir(imageFolder)]
+        for imagePath in imagePaths:
+            faceImg = Image.open(imagePath).convert('L')        # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
+            faceNp = np.array(faceImg, 'uint8')                                     # Converting face array into numpy array
+            ID = int(os.path.split(imagePath)[-1].split('.')[1])                    # Check this again
+            faces.append(faceNp)                                                    # adding the dilevel face into faces array
+            Ids.append(ID)                                                          # index of ID and faceNp is same in both arrays
+            cv2.imshow("Training", faceNp)                                          # Showing the faces which are getting trained
+            cv2.waitKey(10)
+                                                                        # Empty array for Person Ids
+                                                             # Waiting time id 10 milisecond
     return Ids, faces
 
 Ids, faces = getImagesWithID(path)                                              # Calling the function

@@ -2,6 +2,7 @@ import cv2                                                                      
 import numpy as np                                                              # for numpy arrays
 import sqlite3
 import dlib
+import os                                                                       #for creating folders 
 
 # cap = cv2.VideoCapture('video_for_training.mp4')
 cap = cv2.VideoCapture(0)
@@ -27,6 +28,13 @@ Id = raw_input('Enter user id : ')
 name = raw_input("Enter student's name : ")
 roll = raw_input("Enter student's roll no. : ")
 insertOrUpdate(Id, name, roll)                                                  # calling the sqlite3 database
+
+#creating the person or user folder
+folderName = "user" + Id
+folderPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "dataset/"+folderName)
+if not os.path.exists(folderPath):
+    os.makedirs(folderPath)
+
 sampleNum = 0
 while(True):
     ret, img = cap.read()                                                       # reading the camera input
@@ -34,11 +42,10 @@ while(True):
     dets = detector(img, 1)
     for i, d in enumerate(dets):                                                # loop will run for each face detected
         sampleNum += 1
-        # instead of a single folder, make different folder for each person
         # align the faces before Saving
-        cv2.imwrite("./dataset/User."+Id+"."+str(sampleNum)+".jpg",
+        cv2.imwrite(folderPath + "/User." + Id + "." + str(sampleNum) + ".jpg",
                     img[d.top():d.bottom(), d.left():d.right()])                # Saving the faces
-        cv2.rectangle(img, (d.left(), d.top()),(d.right(), d.bottom()),(0,255,0) ,2) # Forming the rectangle
+        cv2.rectangle(img, (d.left(), d.top())  ,(d.right(), d.bottom()),(0,255,0) ,2) # Forming the rectangle
         cv2.waitKey(200)                                                        # waiting time of 200 milisecond
     cv2.imshow('frame', img)                                                    # showing the video input from camera on window
     cv2.waitKey(1)
