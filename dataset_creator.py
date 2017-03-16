@@ -5,7 +5,7 @@ import sqlite3
 detector = cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
 
 # cap = cv2.VideoCapture('video_for_training.mp4')
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 def insertOrUpdate(Id, Name, roll) :                                            # this function is for database
     connect = sqlite3.connect("Face-DataBase")                                  # connecting to the database

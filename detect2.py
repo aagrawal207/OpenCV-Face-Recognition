@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 face_cascade = cv2.CascadeClassifier('./HaarCascade/haarcascade_frontalface_alt_tree.xml')
 eye_cascade = cv2.CascadeClassifier('./HaarCascade/haarcascade_eye.xml')
 
-img = cv2.imread('pic1.jpeg')
+img = cv2.imread('IMG_20170316_160756.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 faces = face_cascade.detectMultiScale(
                         gray,
@@ -15,6 +15,7 @@ faces = face_cascade.detectMultiScale(
                         )
 for (x, y, w, h) in faces:
     cv2.rectangle(img, (x, y), (x+w, y+h), (255, 255, 255), 2)
+    cv2.imwrite('malhar.jpg', img[y:y+h, x:x+w])
     # cv2.circle(img, (x + w/2, y+h/2),w, (255, 0, 0), 2)
     roi_gray = gray[y:y+h, x:x+w]
     roi_color = img[y:y+h, x:x+w]

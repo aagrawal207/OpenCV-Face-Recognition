@@ -4,7 +4,7 @@ import os
 import time
 import sqlite3
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 detector = dlib.get_frontal_face_detector()
 date = time.strftime("%d.%m.%Y")
 path = './pics_taken/' + date

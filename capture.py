@@ -1,7 +1,7 @@
 import cv2
 from matplotlib import pyplot as plt
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 s, img = cam.read()
 
 
