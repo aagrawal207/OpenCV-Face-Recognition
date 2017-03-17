@@ -32,7 +32,19 @@
 
   -Storing in an array how many total times, a particular student is recognized today
 
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+-shape_predictor_68_face_landmarks.dat
+  JAW_POINTS = list(range(0, 16))
+  RIGHT_BROW_POINTS = list(range(17, 21))
+  LEFT_BROW_POINTS = list(range(22, 26))
+  NOSE_POINTS = list(range(27, 35))
+  RIGHT_EYE_POINTS = list(range(36, 42))
+  LEFT_EYE_POINTS = list(range(42, 48))
+  MOUTH_POINTS = list(range(48, 61))
+
+  [Extra : inside the face boundary]FACE_POINTS = list(range(17, 68))
+  [Extra]CHIN_POINTS=list(range(6,11))
+-----------------------------------------------------------------------------------------------------------------------------
 References ->
 Dlib face detection(Important) - http://dlib.net/face_detector.py.html
                                  https://github.com/davisking/dlib

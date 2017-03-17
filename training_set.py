@@ -4,8 +4,29 @@ import numpy as np                                                              
 from PIL import Image                                                           # for Image.open(imagePath).convert('L')
 
 PREDICTOR_PATH = './shape_predictor_68_face_landmarks.dat'
+predictor = dlib.shape_predictor(PREDICTOR_PATH)
 recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
 path = './dataset'                                                              # Folder where faces are saved
+
+def get_landmarks(im):
+    rects = detector(im, 1)
+    rect=rects[0]
+    print type(rect.width())
+    fwd=int(rect.width())
+    if len(rects) == 0:
+        return None,None
+    return np.matrix([[p.x, p.y] for p in predictor(im, rects[0]).parts()]),fwd
+
+def annotate_landmarks(im, landmarks):
+    im = im.copy()
+    for idx, point in enumerate(landmarks):
+        pos = (point[0, 0], point[0, 1])
+        cv2.putText(im, str(idx), pos,
+                    fontFace=cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,
+                    fontScale=0.4,
+                    color=(0, 0, 255))
+        cv2.circle(im, pos, 3, color=(0, 255, 255))
+    return im
 
 def align(image, eye_left, eye_right):
 
