@@ -1,6 +1,8 @@
 import cv2
 import dlib
 import os
+import sys
+import math
 import time
 import sqlite3
 
@@ -27,8 +29,8 @@ font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                
 
 # make an array of all the students in the database initialied as zero
 
-picNum = 12
-img = cv2.imread('IMG_20170316_233102_01.jpg')
+picNum = 4
+img = cv2.imread('IMG_20170316_171423.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
 dets = detector(img, 1)
 # folderName = path + '/pic' + str(picNum)
@@ -39,8 +41,9 @@ faceRec = 0
 for i, d in enumerate(dets):
     # picName = str(i + 1) + '.jpg'
     # picFolderName = folderName + '/' + picName
-    id, conf = rec.predict(gray[d.top():d.bottom(), d.left():d.right()])    # Comparing from the trained data
-    if conf < 32:
+    img2 = gray[d.top():d.bottom(), d.left():d.right()]
+    id, conf = rec.predict(img2)    # Comparing from the trained data
+    if conf < 30:
         totalConf += conf
         faceRec += 1
         profile = getProfile(id)

@@ -26,8 +26,8 @@ font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                
 
 # make an array of all the students in the database initialied as zero
 
-picNum = 1
-img = cv2.imread('IMG_20170316_171423.jpg')
+picNum = 2
+img = cv2.imread('IMG_20170316_171158.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
 faces = face_cascade.detectMultiScale(
                         gray,

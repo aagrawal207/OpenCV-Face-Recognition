@@ -3,10 +3,14 @@ import cv2                                                                      
 import numpy as np                                                              # for numpy arrays
 from PIL import Image                                                           # for Image.open(imagePath).convert('L')
 
+PREDICTOR_PATH = './shape_predictor_68_face_landmarks.dat'
 recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
 path = './dataset'                                                              # Folder where faces are saved
 
-def getImagesWithID(path):      
+def align(image, eye_left, eye_right):
+
+
+def getImagesWithID(path):
     imageFolders = [os.path.join(path, f) for f in os.listdir(path)]    # Joining './dataset' and '<image names>'
     faces = []                                                                  # Empty array for faces
     Ids = []
