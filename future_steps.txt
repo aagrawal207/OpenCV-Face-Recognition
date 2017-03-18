@@ -1,7 +1,0 @@
-1. Implement the same with OpenFace(dlib)(Important)
-2. Connect a webcam and impement it in the class(Important)
-  -Train the dataset properly
-3. Find various thresholds with VideoCapture and Image Captured to check which one is better(Important)
-4. Test it live in a class with Pi and without Pi for one hour(Not Important)
-5. Connect it to an excel sheet - https://automatetheboringstuff.com/chapter12/(Not Important)
-6. Make a 60 minute video and edit the parts where important things are happening
