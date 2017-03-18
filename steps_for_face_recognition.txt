@@ -54,6 +54,9 @@
   [Extra : inside the face boundary]FACE_POINTS = list(range(17, 68))
   [Extra]CHIN_POINTS=list(range(6,11))
 -----------------------------------------------------------------------------------------------------------------------------
+Pillow uses : https://github.com/python-pillow/Pillow/issues/513
+open, covert color palette, resize
+-----------------------------------------------------------------------------------------------------------------------------
 References ->
 Dlib face detection(Important) - http://dlib.net/face_detector.py.html
                                  https://github.com/davisking/dlib

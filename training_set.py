@@ -1,35 +1,14 @@
 import os                                                                       # import for taking the imagePaths
 import cv2                                                                      # openCV
 import numpy as np                                                              # for numpy arrays
-from PIL import Image                                                           # for Image.open(imagePath).convert('L')
+from PIL import Image                                                           # pillow
+import openface
 
-PREDICTOR_PATH = './shape_predictor_68_face_landmarks.dat'
-predictor = dlib.shape_predictor(PREDICTOR_PATH)
+dlibFacePredictor = 'shape_predictor_68_face_landmarks.dat'                     # Path to dlib's face predictor
 recognizer = cv2.createLBPHFaceRecognizer()                                     # Local Binary Patterns Histograms
 path = './dataset'                                                              # Folder where faces are saved
-
-def get_landmarks(im):
-    rects = detector(im, 1)
-    rect=rects[0]
-    print type(rect.width())
-    fwd=int(rect.width())
-    if len(rects) == 0:
-        return None,None
-    return np.matrix([[p.x, p.y] for p in predictor(im, rects[0]).parts()]),fwd
-
-def annotate_landmarks(im, landmarks):
-    im = im.copy()
-    for idx, point in enumerate(landmarks):
-        pos = (point[0, 0], point[0, 1])
-        cv2.putText(im, str(idx), pos,
-                    fontFace=cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,
-                    fontScale=0.4,
-                    color=(0, 0, 255))
-        cv2.circle(im, pos, 3, color=(0, 255, 255))
-    return im
-
-def align(image, eye_left, eye_right):
-
+imgDim = 96                                                                     # Default image dimension
+align = openface.AlignDlib(dlibFacePredictor)
 
 def getImagesWithID(path):
     imageFolders = [os.path.join(path, f) for f in os.listdir(path)]    # Joining './dataset' and '<image names>'
@@ -38,7 +17,12 @@ def getImagesWithID(path):
     for imageFolder in imageFolders:
         imagePaths = [os.path.join(imageFolder, f) for f in os.listdir(imageFolder)]
         for imagePath in imagePaths:
-            faceImg = Image.open(imagePath).convert('L')        # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
+            image = cv2.imread(imagePath)
+            rgbImg = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            bb = align.getLargestFaceBoundingBox(rgbImg)
+            alignedFace = align.align(imgDim, rgbImg, bb=None, landmarkIndices=openface.AlignDlib.OUTER_EYES_AND_NOSE)
+            cv2.imwrite('./for_training.jpg', alignedFace)
+            faceImg = Image.open('./for_training.jpg').convert('L')        # Converting colored and GrayScale images into bilevel images using Floyd-Steinberg dither
             faceNp = np.array(faceImg, 'uint8')                                     # Converting face array into numpy array
             ID = int(os.path.split(imagePath)[-1].split('.')[1])                    # Check this again
             faces.append(faceNp)                                                    # adding the dilevel face into faces array

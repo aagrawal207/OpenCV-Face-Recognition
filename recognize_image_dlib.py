@@ -5,11 +5,15 @@ import sys
 import math
 import time
 import sqlite3
+from PIL import Image                                                           # pillow
+import openface
 
 cam = cv2.VideoCapture(1)
 detector = dlib.get_frontal_face_detector()
 date = time.strftime("%d.%m.%Y")
 path = './pics_taken/' + date
+dlibFacePredictor = 'shape_predictor_68_face_landmarks.dat'                     # Path to dlib's face predictor
+align = openface.AlignDlib(dlibFacePredictor)
 if not os.path.exists(path):
     os.makedirs(path)
 
@@ -29,9 +33,9 @@ font = cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_PLAIN, 2, 1, 0, 1)                
 
 # make an array of all the students in the database initialied as zero
 
-picNum = 4
-img = cv2.imread('IMG_20170316_171423.jpg')
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                # conveting the camera input into GrayScale
+picNum = 2
+img = cv2.imread('IMG_20170316_171158.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                    # conveting the camera input into GrayScale
 dets = detector(img, 1)
 # folderName = path + '/pic' + str(picNum)
 # if not os.path.exists(folderName):
@@ -41,9 +45,13 @@ faceRec = 0
 for i, d in enumerate(dets):
     # picName = str(i + 1) + '.jpg'
     # picFolderName = folderName + '/' + picName
-    img2 = gray[d.top():d.bottom(), d.left():d.right()]
-    id, conf = rec.predict(img2)    # Comparing from the trained data
-    if conf < 30:
+    img2 = img[d.top():d.bottom(), d.left():d.right()]
+    rgbImg = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+    bb = align.getLargestFaceBoundingBox(rgbImg)
+    alignedFace = align.align(96, rgbImg, bb=None, landmarkIndices=openface.AlignDlib.OUTER_EYES_AND_NOSE)
+    alignedFace = cv2.cvtColor(alignedFace, cv2.COLOR_BGR2GRAY)                 # conveting the camera input into GrayScale
+    id, conf = rec.predict(alignedFace)    # Comparing from the trained data
+    if conf < 50:
         totalConf += conf
         faceRec += 1
         profile = getProfile(id)
