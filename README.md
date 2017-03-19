@@ -6,4 +6,4 @@ Face detection is near perfect and we mainly need to work on improving face reco
 
 Exact statistics for the accuracy of the system will we updated soon.
 
-For more information, also refer to steps_for_face_recognition.txt. Feedback and Suggestions will be really appreciated. 
+For more information, also refer to steps_for_face_recognition.txt and the folder named "Information". Feedback and Suggestions will be really appreciated. 
