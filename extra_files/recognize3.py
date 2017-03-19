@@ -13,5 +13,3 @@ dets = detector(img, 1)
 for i, d in enumerate(dets):
     cv2.imwrite('./Croped_faces/face' + str(picNum) + '.jpg', img[d.top():d.bottom(), d.left():d.right()])
     picNum += 1
-
-cv2.destroyAllWindows()                                                         # Closing all the opened windows
