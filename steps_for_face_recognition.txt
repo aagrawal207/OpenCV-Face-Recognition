@@ -68,3 +68,4 @@ OpenFace(Tried a lot to use) - http://www.cv-foundation.org/openaccess/content_c
 OpenFace website - https://cmusatyalab.github.io/openface/
 FaceNet: A Unified Embedding for Face Recognition and Clustering(Still has to read this paper, found it on openface website) -
     http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf
+Modern Face Recognition with Deep Learning - https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78#.rytb8kr0w
